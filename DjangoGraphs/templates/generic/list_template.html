@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load django_tables2 %}
+{% load class_tag %}
+
+{% block title %}{% trans 'List' %} - {{ title }}{% endblock %}
+
+{% block content %}
+
+    <h3>{{ title }} {% trans 'List' %}
+    {% if table.Meta.model|get_class == 'Graph' %}
+        <a href="{% url 'new_graph' %}" ><i class="fas fa-plus-circle"></i></a>
+    {% endif %}
+    {% if table.Meta.model|get_class == 'GraphSelector' %}
+        <a href="{% url 'new_graph_selector' %}" ><i class="fas fa-plus-circle"></i></a>
+    {% endif %}
+    {% if table.Meta.model|get_class == 'Type' %}
+        <a href="{% url 'new_type' %}" ><i class="fas fa-plus-circle"></i></a>
+    {% endif %}
+    {% if table.Meta.model|get_class == 'Instance' %}
+        <a href="{% url 'new_instance' %}" ><i class="fas fa-plus-circle"></i></a>
+    {% endif %}
+    </h3>
+    <br/>
+
+    {% if table %}
+        {% render_table table %}
+    {% endif %}
+
+{% endblock %}

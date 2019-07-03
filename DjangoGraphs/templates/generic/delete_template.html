@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}{% trans 'Delete' %} - {{ title }}{% endblock %}
+
+{% block extra_head %}
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+
+    <h3>{% trans 'Delete' %} {{ title }}</h3>
+
+    <form action="." method="post">
+        {% csrf_token %}
+        <div class="alert alert-danger" role="alert">
+            {% blocktrans %}Are you sure you want to delete the {{ title }}: <b>{{ object }}</b> {% endblocktrans %}
+        </div>
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> {% trans 'Delete' %}</button>
+        <a href="{% url 'index' %}" class="btn btn-success" >{% trans 'Cancel' %}</a>
+    </form>
+
+{% endblock %}

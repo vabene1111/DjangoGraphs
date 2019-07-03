@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'DjangoGraphs' %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css"
+          integrity="sha256-IvM9nJf/b5l2RoebiFno92E5ONttVyaEEsdemDC6iQA=" crossorigin="anonymous"/>
+{% endblock %}
+
+{% block content %}
+    <br/>
+    <br/>
+
+    <canvas id="chart_1"></canvas>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+            integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            let s1 = {
+                label: 'Temperatur',
+                borderColor: '#ff4433',
+                data: [
+                    {x: '2017-01-08 18:01', y: 30},
+                    {x: '2017-01-08 18:02', y: 32},
+                    {x: '2017-01-08 18:03', y: 34},
+                    {x: '2017-01-08 18:04', y: 31},
+                ]
+            };
+
+            let s2 = {
+                label: 'Co2',
+                borderColor: '#33dd11',
+                data: [
+                    {x: '2017-01-08 18:01:00', y: 20},
+                    {x: '2017-01-08 18:02:00', y: 22},
+                    {x: '2017-01-08 18:03:00', y: 24},
+                    {x: '2017-01-08 18:04:00', y: 21},
+                ]
+            };
+
+            let chart_1_canvas = document.getElementById('chart_1');
+            let chart_1 = new Chart(chart_1_canvas, {
+                type: 'line',
+                data: {
+                    datasets: [s1, s2]
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            type: 'time',
+                            time: {
+                                displayFormats: {
+                                    millisecond: 'h:mm D MMM YYYY',
+                                    second: 'h:mm D MMM YYYY',
+                                    minute: 'h:mm D MMM YYYY',
+                                    hour: 'h:mm D MMM YYYY',
+                                    day: 'h:mm D MMM YYYY',
+                                    week: 'h:mm D MMM YYYY',
+                                    month: 'h:mm D MMM YYYY',
+                                    quarter: 'h:mm D MMM YYYY',
+                                    year: 'h:mm D MMM YYYY',
+                                }
+                            },
+                            gridLines: {
+                                display: false
+                            },
+                            ticks: {
+                                fontColor: 'white'
+                            }
+                        }],
+                        yAxes: [{
+                            gridLines: {
+                                color: 'grey'
+                            },
+                            ticks: {
+                                fontColor: 'white'
+                            }
+                        }]
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    title: {
+                        display: true,
+                        text: 'Test',
+                        fontColor: 'white'
+                    }
+                }
+            });
+        });
+
+    </script>
+{% endblock %}
