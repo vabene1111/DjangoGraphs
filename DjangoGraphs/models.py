@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from django.db import models
 
 
@@ -22,7 +24,7 @@ class DataEntry(models.Model):
     type = models.ForeignKey(Type, on_delete=models.PROTECT)
     instance = models.ForeignKey(Instance, on_delete=models.PROTECT)
     value = models.FloatField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return str(self.timestamp) + ' : ' + str(self.value)
