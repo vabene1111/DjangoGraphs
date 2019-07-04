@@ -3,6 +3,7 @@ djangorestframework
 markdown
 coreapi
 pygments
+django-cors-headers
 django-crispy-forms
 django-filter
 django-tables2
