@@ -1,5 +1,6 @@
+from braces.views import GroupRequiredMixin, LoginRequiredMixin
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.translation import gettext as _
@@ -9,7 +10,11 @@ from ..forms import *
 from ..models import *
 
 
-class GraphUpdate(LoginRequiredMixin, UpdateView):
+class GraphUserGroupRequiredMixin(GroupRequiredMixin):
+    group_required = [u"User", ]
+
+
+class GraphUpdate(LoginRequiredMixin, GraphUserGroupRequiredMixin, UpdateView):
     model = Graph
     form_class = GraphForm
     template_name = "generic/edit_template.html"
@@ -31,7 +36,7 @@ class GraphUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-class GraphSelectorUpdate(LoginRequiredMixin, UpdateView):
+class GraphSelectorUpdate(LoginRequiredMixin, GraphUserGroupRequiredMixin, UpdateView):
     model = GraphSelector
     form_class = GraphSelectorForm
     template_name = "generic/edit_template.html"
@@ -53,7 +58,7 @@ class GraphSelectorUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-class TypeUpdate(LoginRequiredMixin, UpdateView):
+class TypeUpdate(LoginRequiredMixin, GraphUserGroupRequiredMixin, UpdateView):
     model = Type
     form_class = TypeForm
     template_name = "generic/edit_template.html"
@@ -75,7 +80,7 @@ class TypeUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-class InstanceUpdate(LoginRequiredMixin, UpdateView):
+class InstanceUpdate(LoginRequiredMixin, GraphUserGroupRequiredMixin, UpdateView):
     model = Instance
     form_class = InstanceForm
     template_name = "generic/edit_template.html"
@@ -103,7 +108,7 @@ def delete_redirect(request, name, pk):
     return redirect(('delete_' + name), pk)
 
 
-class GraphDelete(LoginRequiredMixin, DeleteView):
+class GraphDelete(LoginRequiredMixin, GraphUserGroupRequiredMixin, DeleteView):
     template_name = "generic/delete_template.html"
     model = Graph
     success_url = reverse_lazy('list_graph')
@@ -114,7 +119,7 @@ class GraphDelete(LoginRequiredMixin, DeleteView):
         return context
 
 
-class GraphSelectorDelete(LoginRequiredMixin, DeleteView):
+class GraphSelectorDelete(LoginRequiredMixin, GraphUserGroupRequiredMixin, DeleteView):
     template_name = "generic/delete_template.html"
     model = GraphSelector
     success_url = reverse_lazy('list_graph_selector')
@@ -125,7 +130,7 @@ class GraphSelectorDelete(LoginRequiredMixin, DeleteView):
         return context
 
 
-class TypeDelete(LoginRequiredMixin, DeleteView):
+class TypeDelete(LoginRequiredMixin, GraphUserGroupRequiredMixin, DeleteView):
     template_name = "generic/delete_template.html"
     model = Type
     success_url = reverse_lazy('list_type')
@@ -136,7 +141,7 @@ class TypeDelete(LoginRequiredMixin, DeleteView):
         return context
 
 
-class InstanceDelete(LoginRequiredMixin, DeleteView):
+class InstanceDelete(LoginRequiredMixin, GraphUserGroupRequiredMixin, DeleteView):
     template_name = "generic/delete_template.html"
     model = Instance
     success_url = reverse_lazy('list_instance')

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'corsheaders',
+    'braces',
     'DjangoGraphs.apps.DjangographsConfig',
 ]
 

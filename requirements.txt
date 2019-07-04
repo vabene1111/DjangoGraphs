@@ -7,6 +7,7 @@ django-cors-headers
 django-crispy-forms
 django-filter
 django-tables2
+django-braces
 python-dotenv
 psycopg2
 gunicorn
