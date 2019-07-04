@@ -10,7 +10,8 @@ class GraphTable(tables.Table):
     id = tables.LinkColumn('edit_graph', args=[A('id')])
 
     options = tables.TemplateColumn(
-        "<a href='{% url 'delete_graph' record.id %}' class='btn btn-danger'><i class='fas fa-trash'></i></a>",
+        "<a href='{% url 'delete_graph' record.id %}' class='btn btn-danger'><i class='fas fa-trash'></i></a> " +
+        "<a href='{% url 'view_graph' record.id %}' class='btn btn-success'><i class='fas fa-eye'></i></a>",
         verbose_name=_('Options'))
 
     class Meta:

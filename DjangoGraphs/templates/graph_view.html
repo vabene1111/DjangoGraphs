@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load class_tag %}
+
+{% block title %}{% trans 'DjangoGraphs' %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"
+          integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous"/>
+{% endblock %}
+
+{% block content %}
+
+    <canvas id="graph"></canvas>
+
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
+            integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+            integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            var datasets = [];
+            {% for gd in graph_data %}
+
+                datasets.push({
+                    label: '{{ gd.label }}',
+                    suffix: '{{ gd.unit }}',
+                    borderColor: '{{ gd.color }}',
+                    data: [
+                        {% for dp in gd.data %}
+                            {x: '{{ dp.timestamp|date:"Y-m-d h:i" }}', y: '{{ dp.value }}'},
+                        {% endfor %}
+                    ]
+                });
+
+            {% endfor %}
+
+            let graph_canvas = document.getElementById('graph');
+            let graph = new Chart(graph_canvas, {
+                type: 'line',
+                data: {
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            type: 'time',
+                            gridLines: {
+                                display: false
+                            },
+                            ticks: {
+                                display: false,
+                                fontColor: 'white'
+                            }
+                        }],
+                        yAxes: [{
+                            gridLines: {
+                                color: 'grey'
+                            },
+                            ticks: {
+                                fontColor: 'white'
+                            }
+                        }]
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: '#444444',
+                        callbacks: {
+                            title: function (tooltipItems, data) {
+                                return moment(tooltipItems[0].xLabel).format("hh:mm, DD. MMM YYYY");
+                            },
+                            label: function (tooltipItems, data) {
+                                return tooltipItems.yLabel + ' ' + data.datasets[tooltipItems.datasetIndex].suffix;
+                            }
+                        }
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    title: {
+                        display: true,
+                        text: '{% if graph.title %}{{ graph.title }}{% else %}{{ graph.name }}{% endif %}',
+                        fontColor: 'white'
+                    }
+                }
+            });
+
+
+        });
+
+    </script>
+{% endblock %}
