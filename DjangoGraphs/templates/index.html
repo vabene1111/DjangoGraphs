@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load class_tag %}
 
 {% block title %}{% trans 'DjangoGraphs' %}{% endblock %}
 
@@ -13,8 +14,6 @@
     {% for g in graphs %}
         <canvas id="chart_{{ g.pk }}"></canvas>
     {% endfor %}
-
-    {{ graph_data }}
 
 {% endblock %}
 
@@ -31,8 +30,7 @@
         $(document).ready(function () {
             {% for g in graphs %}
                 var datasets = [];
-                {% for gd in graph_data['1'] %}
-                    {{ graph_data }}
+                {% for gd in graph_data|get_item:g.pk %}
 
                     datasets.push({
                         label: '{{ gd.label }}',
@@ -40,7 +38,7 @@
                         borderColor: '{{ gd.color }}',
                         data: [
                             {% for dp in gd.data %}
-                                {x: '{{ dp.timestamp }}', y: '{{ dp.value }}'},
+                                {x: '{{ dp.timestamp|date:"Y-m-d h:i" }}', y: '{{ dp.value }}'},
                             {% endfor %}
                         ]
                     });
