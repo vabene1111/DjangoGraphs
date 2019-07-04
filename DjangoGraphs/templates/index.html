@@ -9,7 +9,13 @@
 {% endblock %}
 
 {% block content %}
-    <canvas id="chart_1"></canvas>
+
+    {% for g in graphs %}
+        <canvas id="chart_{{ g.pk }}"></canvas>
+    {% endfor %}
+
+    {{ graph_data }}
+
 {% endblock %}
 
 {% block script %}
@@ -23,87 +29,85 @@
     <script>
 
         $(document).ready(function () {
-            let s1 = {
-                label: 'Temperatur',
-                suffix: '°C',
-                borderColor: '#ff4433',
-                data: [
-                    {x: '2017-01-08 18:01', y: 30},
-                    {x: '2017-01-08 18:02', y: 32},
-                    {x: '2017-01-08 18:03', y: 34},
-                    {x: '2017-01-08 18:04', y: 31},
-                ]
-            };
+            {% for g in graphs %}
+                var datasets = [];
+                {% for gd in graph_data['1'] %}
+                    {{ graph_data }}
 
-            let s2 = {
-                label: 'Co2',
-                suffix: '%',
-                borderColor: '#33dd11',
-                data: [
-                    {x: '2017-01-08 18:01:00', y: 20},
-                    {x: '2017-01-08 18:02:00', y: 22},
-                    {x: '2017-01-08 18:03:00', y: 24},
-                    {x: '2017-01-08 18:04:00', y: 21},
-                ]
-            };
+                    datasets.push({
+                        label: '{{ gd.label }}',
+                        suffix: '{{ gd.unit }}',
+                        borderColor: '{{ gd.color }}',
+                        data: [
+                            {% for dp in gd.data %}
+                                {x: '{{ dp.timestamp }}', y: '{{ dp.value }}'},
+                            {% endfor %}
+                        ]
+                    });
 
-            let chart_1_canvas = document.getElementById('chart_1');
-            let chart_1 = new Chart(chart_1_canvas, {
-                type: 'line',
-                data: {
-                    datasets: [s1, s2]
-                },
-                options: {
-                    responsive: true,
-                    legend: {
-                        labels: {
+                {% endfor %}
+
+                let chart_{{ g.pk }}_canvas = document.getElementById('chart_{{ g.pk }}');
+                let chart_{{ g.pk }} = new Chart(chart_{{ g.pk }}_canvas, {
+                    type: 'line',
+                    data: {
+                        datasets: datasets
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            labels: {
+                                fontColor: 'white'
+                            }
+                        },
+                        scales: {
+                            xAxes: [{
+                                type: 'time',
+                                gridLines: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false,
+                                    fontColor: 'white'
+                                }
+                            }],
+                            yAxes: [{
+                                gridLines: {
+                                    color: 'grey'
+                                },
+                                ticks: {
+                                    fontColor: 'white'
+                                }
+                            }]
+                        },
+                        tooltips: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: '#444444',
+                            callbacks: {
+                                title: function (tooltipItems, data) {
+                                    return moment(tooltipItems[0].xLabel).format("hh:mm, DD. MMM YYYY");
+                                },
+                                label: function (tooltipItems, data) {
+                                    return tooltipItems.yLabel + ' ' + data.datasets[tooltipItems.datasetIndex].suffix;
+                                }
+                            }
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true
+                        },
+                        title: {
+                            display: true,
+                            text: '{% if g.title %}{{ g.title }}{% else %}{{ g.name }}{% endif %}',
                             fontColor: 'white'
                         }
-                    },
-                    scales: {
-                        xAxes: [{
-                            type: 'time',
-                            gridLines: {
-                                display: false
-                            },
-                            ticks: {
-                                display: false,
-                                fontColor: 'white'
-                            }
-                        }],
-                        yAxes: [{
-                            gridLines: {
-                                color: 'grey'
-                            },
-                            ticks: {
-                                fontColor: 'white'
-                            }
-                        }]
-                    },
-                    tooltips: {
-                        mode: 'index',
-                        intersect: false,
-                        backgroundColor: '#444444',
-                        callbacks: {
-                            title: function (tooltipItems, data) {
-                                return moment(tooltipItems[0].xLabel).format("hh:mm, DD. MMM YYYY");
-                            },
-                            label: function (tooltipItems, data) {
-                                return tooltipItems.yLabel + ' ' + data.datasets[tooltipItems.datasetIndex].suffix;
-                            }
-                        }
-                    },
-                    hover: {
-                        mode: 'nearest',
-                        intersect: true
-                    },
-                    title: {
-                        display: true,
-                        text: 'Test', //TODO replace DB
-                        fontColor: 'white'
                     }
-                }
-            });
+                });
+
+            {% endfor %}
+
+
         });
 
     </script>

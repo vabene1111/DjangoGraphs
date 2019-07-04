@@ -21,7 +21,7 @@ class GraphSelectorForm(forms.ModelForm):
 class TypeForm(forms.ModelForm):
     class Meta:
         model = Type
-        fields = ('name', 'description')
+        fields = ('name', 'description', 'unit')
 
 
 class InstanceForm(forms.ModelForm):

@@ -2,15 +2,16 @@ from django.db import models
 
 
 class Type(models.Model):
-    name = models.CharField(max_length=64, default="")
+    name = models.CharField(max_length=64, default='')
     description = models.TextField(blank=True)
+    unit = models.CharField(max_length=8, default='', blank='')
 
     def __str__(self):
         return self.name
 
 
 class Instance(models.Model):
-    name = models.CharField(max_length=64, default="")
+    name = models.CharField(max_length=64, default='')
     description = models.TextField(blank=True)
 
     def __str__(self):
@@ -23,9 +24,12 @@ class DataEntry(models.Model):
     value = models.FloatField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return str(self.timestamp) + ' : ' + str(self.value)
+
 
 class GraphSelector(models.Model):
-    name = models.CharField(max_length=64, default="")
+    name = models.CharField(max_length=64, default='')
     type = models.ForeignKey(Type, on_delete=models.PROTECT)
     instance = models.ForeignKey(Instance, on_delete=models.PROTECT)
 
@@ -36,8 +40,8 @@ class GraphSelector(models.Model):
 
 
 class Graph(models.Model):
-    name = models.CharField(max_length=64, default="")
-    title = models.CharField(max_length=64, default="")
+    name = models.CharField(max_length=64, default='')
+    title = models.CharField(max_length=64, default='')
     active = models.BooleanField(default=True)
     selector = models.ManyToManyField(GraphSelector)
 
