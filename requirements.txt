@@ -1,4 +1,8 @@
 django
+djangorestframework
+markdown
+coreapi
+pygments
 django-crispy-forms
 django-filter
 django-tables2

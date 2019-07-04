@@ -12,7 +12,7 @@ class GraphTable(tables.Table):
     options = tables.TemplateColumn(
         "<a href='{% url 'delete_graph' record.id %}' class='btn btn-danger'><i class='fas fa-trash'></i></a> " +
         "<a href='{% url 'view_graph' record.id %}' class='btn btn-success'><i class='fas fa-eye'></i></a> " +
-        "<a href='{% url 'view_graph_advanced' record.id %}' class='btn btn-info'><i class='fas fa-eye'></i></a>", #TODO icon
+        "<a href='{% url 'view_graph_advanced' record.id %}' class='btn btn-info'><i class='fas fa-binoculars'></i></a>",
         verbose_name=_('Options'))
 
     class Meta:

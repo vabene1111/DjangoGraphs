@@ -1,6 +1,12 @@
-from django.urls import path
+from django.db import router
+from django.urls import path, include
+from rest_framework import routers
+from rest_framework.documentation import include_docs_urls
 
 from .views import *
+
+router = routers.DefaultRouter()
+router.register(r'entry', api.DataEntrySet)
 
 urlpatterns = [
 
@@ -30,4 +36,10 @@ urlpatterns = [
     path('delete/instance/<int:pk>/', edit.InstanceDelete.as_view(), name='delete_instance'),
 
     path('redirect/delete/<slug:name>/<int:pk>/', edit.delete_redirect, name='redirect_delete'),
+
+    # API
+    path('api/docs', include_docs_urls(title='DjangoGraphs API', public=False), name='api_docs'),
+    path('api/auth/', include('rest_framework.urls')),
+
+    path('api/', include(router.urls)),
 ]

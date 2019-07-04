@@ -41,7 +41,7 @@ class GraphSelector(models.Model):
 
 class Graph(models.Model):
     name = models.CharField(max_length=64, default='')
-    title = models.CharField(max_length=64, default='')
+    title = models.CharField(max_length=64, default='', blank=True)
     dashboard = models.BooleanField(default=False)
     public = models.BooleanField(default=False)
     selector = models.ManyToManyField(GraphSelector)

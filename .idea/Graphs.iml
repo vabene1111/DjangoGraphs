@@ -18,8 +18,6 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.7 (Graphs)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="d3.v5" level="application" />
-    <orderEntry type="library" name="require" level="application" />
     <orderEntry type="library" name="Chart.bundle" level="application" />
     <orderEntry type="library" name="Chart.bundle" level="application" />
     <orderEntry type="library" name="jquery-3.3.1.slim" level="application" />
@@ -29,6 +27,10 @@
     <orderEntry type="library" name="Chart" level="application" />
     <orderEntry type="library" name="metricsgraphics" level="application" />
     <orderEntry type="library" name="d3" level="application" />
+    <orderEntry type="library" name="moment" level="application" />
+    <orderEntry type="library" name="Chart" level="application" />
+    <orderEntry type="library" name="d3" level="application" />
+    <orderEntry type="library" name="metricsgraphics" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

@@ -63,6 +63,22 @@
                                 class="fas fa-inbox"></i> {% trans 'Instances' %}</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-exchange-alt"></i> {% trans 'API' %}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'api-root' %}" target="_blank"><i
+                                class="fas fa-laptop-code"></i> {% trans 'API Browser' %}</a>
+                        <a class="dropdown-item" href="{% url 'api-docs:docs-index' %}" target="_blank"><i
+                                class="fas fa-book"></i> {% trans 'API Docs' %}</a>
+
+                    </div>
+                </li>
+
+
+
             {% endif %}
         </ul>
 
