@@ -5,7 +5,10 @@ from DjangoGraphs.models import Graph, DataEntry
 
 
 def index(request):
-    graphs = Graph.objects.filter(active=True).all()
+    graphs = Graph.objects.filter(dashboard=True).all()
+
+    if not request.user.is_authenticated:
+        graphs = Graph.objects.filter(dashboard=True, public=True).all()
 
     graph_data = {}
     for g in graphs:

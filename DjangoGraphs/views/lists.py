@@ -8,9 +8,12 @@ from ..forms import *
 from ..models import *
 from ..tables import *
 
-@login_required
+
 def graph(request):
     table = GraphTable(Graph.objects.all())
+    if not request.user.is_authenticated:
+        table = GraphTable(Graph.objects.filter(public=True).all())
+
     RequestConfig(request, paginate={'per_page': 25}).configure(table)
 
     return render(request, 'generic/list_template.html', {'title': _("Graphs"), 'table': table})

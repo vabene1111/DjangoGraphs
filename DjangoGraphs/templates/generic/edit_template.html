@@ -20,9 +20,12 @@
 
         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {% trans 'Save' %}</button>
 
+        {% if form.instance|get_class|lower == 'boundfield' %}
+
+        {% else %}
         <a href="{% url 'redirect_delete' form.instance|get_class|lower form.instance.pk %}" class="btn btn-danger">
             <i class="fas fa-trash-alt"></i> {% trans 'Delete' %}</a>
-
+        {% endif %}
     </form>
 
 {% endblock %}

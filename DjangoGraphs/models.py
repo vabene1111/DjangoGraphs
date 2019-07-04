@@ -4,7 +4,7 @@ from django.db import models
 class Type(models.Model):
     name = models.CharField(max_length=64, default='')
     description = models.TextField(blank=True)
-    unit = models.CharField(max_length=8, default='', blank='')
+    unit = models.CharField(max_length=8, default='', blank=True)
 
     def __str__(self):
         return self.name
@@ -42,7 +42,8 @@ class GraphSelector(models.Model):
 class Graph(models.Model):
     name = models.CharField(max_length=64, default='')
     title = models.CharField(max_length=64, default='')
-    active = models.BooleanField(default=True)
+    dashboard = models.BooleanField(default=False)
+    public = models.BooleanField(default=False)
     selector = models.ManyToManyField(GraphSelector)
 
     def __str__(self):

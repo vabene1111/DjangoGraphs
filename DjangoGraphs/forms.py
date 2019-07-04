@@ -8,7 +8,7 @@ from .models import *
 class GraphForm(forms.ModelForm):
     class Meta:
         model = Graph
-        fields = ('name', 'title', 'active', 'selector')
+        fields = ('name', 'title', 'dashboard', 'public', 'selector')
 
 
 class GraphSelectorForm(forms.ModelForm):
