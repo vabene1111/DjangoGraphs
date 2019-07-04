@@ -42,23 +42,24 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">{% trans 'Home' %}</a>
+                <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home"></i> {% trans 'Home' %}</a>
             </li>
             {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'list_graph' %}"><i class="fas fa-chart-bar"></i> {% trans 'Graphs' %}</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
-                        {% trans 'List' %}
+                        <i class="fas fa-cogs"></i> {% trans 'Configuration' %}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"> <!--TODO new icons -->
-                        <a class="dropdown-item" href="{% url 'list_graph' %}"><i
-                                class="fas fa-archive"></i> {% trans 'Graphs' %}</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{% url 'list_graph_selector' %}"><i
-                                class="fas fa-tags"></i> {% trans 'Graph Selectors' %}</a>
+                                class="fas fa-filter"></i> {% trans 'Graph Selectors' %}</a>
                         <a class="dropdown-item" href="{% url 'list_type' %}"><i
-                                class="far fa-file-alt"></i> {% trans 'Tyes' %}</a>
+                                class="fas fa-ticket-alt"></i> {% trans 'Types' %}</a>
                         <a class="dropdown-item" href="{% url 'list_instance' %}"><i
-                                class="fas fa-history"></i> {% trans 'Instances' %}</a>
+                                class="fas fa-inbox"></i> {% trans 'Instances' %}</a>
                     </div>
                 </li>
             {% endif %}
@@ -67,7 +68,7 @@
         <ul class="navbar-nav">
             {% if user.is_staff %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin:index' %}">{% trans 'Admin' %}</a>
+                    <a class="nav-link" href="{% url 'admin:index' %}"><i class="fas fa-user-shield"></i> {% trans 'Admin' %}</a>
                 </li>
             {% endif %}
 
@@ -83,10 +84,13 @@
         </ul>
     </div>
 </nav>
-<br/>
-<br/>
+
 
 <div class="container">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 
     {% for message in messages %}
         <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
