@@ -4,8 +4,8 @@
 {% block title %}{% trans 'DjangoGraphs' %}{% endblock %}
 
 {% block extra_head %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css"
-          integrity="sha256-IvM9nJf/b5l2RoebiFno92E5ONttVyaEEsdemDC6iQA=" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"
+          integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous"/>
 {% endblock %}
 
 {% block content %}
@@ -13,14 +13,19 @@
 {% endblock %}
 
 {% block script %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
-            integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
+            integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+            integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+
 
     <script>
 
         $(document).ready(function () {
             let s1 = {
                 label: 'Temperatur',
+                suffix: '°C',
                 borderColor: '#ff4433',
                 data: [
                     {x: '2017-01-08 18:01', y: 30},
@@ -32,6 +37,7 @@
 
             let s2 = {
                 label: 'Co2',
+                suffix: '%',
                 borderColor: '#33dd11',
                 data: [
                     {x: '2017-01-08 18:01:00', y: 20},
@@ -77,6 +83,15 @@
                     tooltips: {
                         mode: 'index',
                         intersect: false,
+                        backgroundColor: '#444444',
+                        callbacks: {
+                            title: function (tooltipItems, data) {
+                                return moment(tooltipItems[0].xLabel).format("hh:mm, DD. MMM YYYY");
+                            },
+                            label: function (tooltipItems, data) {
+                                return tooltipItems.yLabel + ' ' + data.datasets[tooltipItems.datasetIndex].suffix;
+                            }
+                        }
                     },
                     hover: {
                         mode: 'nearest',
@@ -84,7 +99,7 @@
                     },
                     title: {
                         display: true,
-                        text: 'Test',
+                        text: 'Test', //TODO replace DB
                         fontColor: 'white'
                     }
                 }

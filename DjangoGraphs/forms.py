@@ -8,20 +8,20 @@ from .models import *
 class GraphForm(forms.ModelForm):
     class Meta:
         model = Graph
-        fields = ('name', 'active', 'selector')
+        fields = ('name', 'title', 'active', 'selector')
 
 
 class GraphSelectorForm(forms.ModelForm):
     class Meta:
         model = GraphSelector
-        fields = ('type', 'instance')
+        fields = ('name', 'type', 'instance', 'color')
+        widgets = {'color': TextInput(attrs={'type': 'color'})}
 
 
 class TypeForm(forms.ModelForm):
     class Meta:
         model = Type
-        fields = ('name', 'description', 'color')
-        widgets = {'color': TextInput(attrs={'type': 'color'})}
+        fields = ('name', 'description')
 
 
 class InstanceForm(forms.ModelForm):
