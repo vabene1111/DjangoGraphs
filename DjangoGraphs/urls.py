@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.index, name='index'),
 
     path('view/graph/<int:pk>/', views.view_graph, name='view_graph'),
+    path('view/graph_advanced/<int:pk>/', views.view_graph_advanced, name='view_graph_advanced'),
 
     path('new/graph/', new.GraphCreate.as_view(), name='new_graph'),
     path('new/graph_selector/', new.GraphSelectorCreate.as_view(), name='new_graph_selector'),

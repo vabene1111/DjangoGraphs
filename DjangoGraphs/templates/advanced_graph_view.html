@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% load class_tag %}
+
+{% block title %}{% trans 'DjangoGraphs' %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.15.6/metricsgraphics.min.css"
+          integrity="sha256-H83YjkVzXEyHSdZ/5aVRoW2QfqeJ7gIWduA7aCy9tWY=" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" href="{% static 'metricsgraphics-dark.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+    <div style="text-align: center;!important;">
+        <div id="graph"></div>
+
+        <div id="graph_overview"></div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
+            integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"
+            integrity="sha256-D+2/goqcjnuoryb9A0rifuH0rBYS9hKOzNqG91JhAVc=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.15.6/metricsgraphics.min.js"
+            integrity="sha256-QFwUntQpro6H+h/btQ+8nVVDqeZnVQSuqsTTUGz2o44=" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            data = [];
+            {% for gd in graph_data %}
+                data.push([
+                    {% for dp in gd.data %}
+                        {'date': new Date('{{ dp.timestamp|date:"Y-m-d h:i" }}'), 'value': {{ dp.value }}},
+                    {% endfor %}
+                ]);
+            {% endfor %}
+
+
+            legend = [];
+            colors = [];
+            units = [];
+            {% for gd in graph_data %}
+                legend.push('{{ gd.label }}');
+                colors.push('{{ gd.color }}');
+                units.push('{{ gd.unit }}');
+            {% endfor %}
+
+            const main = {
+                title: '{% if graph.title %}{{ graph.title }}{% else %}{{ graph.name }}{% endif %}',
+                data: data,
+                missing_is_hidden: true,
+                target: '#graph',
+                brush: 'xy',
+                right: 100,
+                height: ($(document).height() - 150) * 0.75,
+                full_width: true,
+                legend: legend,
+                color: colors,
+                aggregate_rollover: true,
+                mouseover: function (d, i) {
+                    var pf = d3.format('.0s');
+                    //debugger;
+                    d3.select('#graph svg .mg-active-datapoint').style('fill', 'white')
+                        .text('Header').attr("x", 0).attr("dy","1.2em");
+                    d3.select('#graph svg .mg-active-datapoint').append("tspan").attr("dy", "1em").attr("x", "0").style('fill', 'red')
+                        .text('Test 2');
+                    d3.select('#graph svg .mg-active-datapoint').append("tspan").attr("dy", "1em").attr("x", "0").style('fill', 'red')
+                        .text('Test 2');
+                }
+            };
+
+            MG.data_graphic(main);
+            MG.data_graphic({
+                data: data,
+                height: ($(document).height() - 150) * 0.25,
+                top: 8,
+                bottom: 0,
+                right: 40,
+                missing_is_hidden: true,
+                target: '#graph_overview',
+                brush: 'x',
+                zoom_target: main,
+                x_axis: false,
+                y_axis: false,
+                full_width: true,
+                color: colors,
+                showActivePoint: false,
+            });
+
+        });
+
+    </script>
+
+{% endblock %}
