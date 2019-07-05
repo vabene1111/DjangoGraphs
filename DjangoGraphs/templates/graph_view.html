@@ -93,7 +93,7 @@
                                 return moment(tooltipItems[0].xLabel).format("hh:mm, DD. MMM YYYY");
                             },
                             label: function (tooltipItems, data) {
-                                return tooltipItems.yLabel + ' ' + data.datasets[tooltipItems.datasetIndex].suffix;
+                                return data.datasets[tooltipItems.datasetIndex].label + ' ' + tooltipItems.yLabel + ' ' + data.datasets[tooltipItems.datasetIndex].suffix;
                             }
                         }
                     },
