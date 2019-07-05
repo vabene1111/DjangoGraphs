@@ -38,7 +38,7 @@
                         borderColor: '{{ gd.color }}',
                         data: [
                             {% for dp in gd.data %}
-                                {x: '{{ dp.timestamp|date:"Y-m-d H:i" }}', y: '{{ dp.value }}'},
+                                {x: '{{ dp.timestamp|date:"Y-m-d H:i" }}', y: '{{ dp.value|floatformat:"0" }}'},
                             {% endfor %}
                         ]
                     });

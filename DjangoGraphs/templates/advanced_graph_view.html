@@ -42,7 +42,7 @@
             {% for gd in graph_data %}
                 data.push([
                     {% for dp in gd.data %}
-                        {'date': new Date('{{ dp.timestamp|date:"Y-m-d H:i" }}'), 'value': {{ dp.value }}},
+                        {'date': new Date('{{ dp.timestamp|date:"Y-m-d H:i" }}'), 'value': {{ dp.value|floatformat:"0"  }}},
                     {% endfor %}
                 ]);
             {% endfor %}
