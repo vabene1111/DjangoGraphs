@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from datetime import datetime, timedelta
 
 # Create your views here.
 from django.urls import reverse
@@ -13,6 +14,8 @@ def index(request):
     if not request.user.is_authenticated:
         graphs = Graph.objects.filter(dashboard=True, public=True).all()
 
+    time_threshold = datetime.now() - timedelta(hours=24)
+
     graph_data = {}
     for g in graphs:
         graph_data[g.pk] = []
@@ -25,13 +28,15 @@ def index(request):
                                      'label': label,
                                      'color': s.color,
                                      'unit': s.type.unit,
-                                     'data': DataEntry.objects.filter(type=s.type, instance=s.instance).all()})
+                                     'data': DataEntry.objects.filter(type=s.type, instance=s.instance, timestamp__gt=time_threshold).all()})
 
     return render(request, 'index.html', {'graphs': graphs, 'graph_data': graph_data})
 
 
 def view_graph(request, pk):
     graph = Graph.objects.get(pk=pk)
+
+    time_threshold = datetime.now() - timedelta(hours=24)
 
     if not request.user.is_authenticated:
         if not graph.public:
@@ -47,7 +52,7 @@ def view_graph(request, pk):
                            'label': label,
                            'color': s.color,
                            'unit': s.type.unit,
-                           'data': DataEntry.objects.filter(type=s.type, instance=s.instance).all()})
+                           'data': DataEntry.objects.filter(type=s.type, instance=s.instance, timestamp__gt=time_threshold).all()})
 
     return render(request, 'graph_view.html', {'graph': graph, 'graph_data': graph_data})
 
