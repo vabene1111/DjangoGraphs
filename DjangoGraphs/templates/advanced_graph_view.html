@@ -63,10 +63,8 @@
                 missing_is_hidden: true,
                 target: '#graph',
                 brush: 'xy',
-                right: 100,
                 height: ($(document).height() - 150) * 0.75,
                 full_width: true,
-                legend: legend,
                 color: colors,
                 aggregate_rollover: true,
                 mouseover: function (d, i) {
@@ -90,9 +88,6 @@
             MG.data_graphic({
                 data: data,
                 height: ($(document).height() - 150) * 0.25,
-                top: 8,
-                bottom: 0,
-                right: 40,
                 missing_is_hidden: true,
                 target: '#graph_overview',
                 brush: 'x',

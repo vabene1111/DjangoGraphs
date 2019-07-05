@@ -17,8 +17,12 @@ def index(request):
     for g in graphs:
         graph_data[g.pk] = []
         for s in g.selector.all():
+            label = s.name
+            if s.title:
+                label = s.title
+
             graph_data[g.pk].append({'id': s.pk,
-                                     'label': s.name,
+                                     'label': label,
                                      'color': s.color,
                                      'unit': s.type.unit,
                                      'data': DataEntry.objects.filter(type=s.type, instance=s.instance).all()})
@@ -35,8 +39,12 @@ def view_graph(request, pk):
 
     graph_data = []
     for s in graph.selector.all():
+        label = s.name
+        if s.title:
+            label = s.title
+
         graph_data.append({'id': s.pk,
-                           'label': s.name,
+                           'label': label,
                            'color': s.color,
                            'unit': s.type.unit,
                            'data': DataEntry.objects.filter(type=s.type, instance=s.instance).all()})
@@ -53,8 +61,12 @@ def view_graph_advanced(request, pk):
 
     graph_data = []
     for s in graph.selector.all():
+        label = s.name
+        if s.title:
+            label = s.title
+
         graph_data.append({'id': s.pk,
-                           'label': s.name,
+                           'label': label,
                            'color': s.color,
                            'unit': s.type.unit,
                            'data': DataEntry.objects.filter(type=s.type, instance=s.instance).all()})

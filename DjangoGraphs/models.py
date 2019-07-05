@@ -32,6 +32,7 @@ class DataEntry(models.Model):
 
 class GraphSelector(models.Model):
     name = models.CharField(max_length=64, default='')
+    title = models.CharField(max_length=64, default='', blank=True)
     type = models.ForeignKey(Type, on_delete=models.PROTECT)
     instance = models.ForeignKey(Instance, on_delete=models.PROTECT)
 

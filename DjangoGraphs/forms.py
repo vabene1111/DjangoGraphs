@@ -14,7 +14,7 @@ class GraphForm(forms.ModelForm):
 class GraphSelectorForm(forms.ModelForm):
     class Meta:
         model = GraphSelector
-        fields = ('name', 'type', 'instance', 'color')
+        fields = ('name', 'title' , 'type', 'instance', 'color')
         widgets = {'color': TextInput(attrs={'type': 'color'})}
 
 
