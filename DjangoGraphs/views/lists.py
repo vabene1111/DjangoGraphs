@@ -18,6 +18,7 @@ def graph(request):
 
     return render(request, 'generic/list_template.html', {'title': _("Graphs"), 'table': table})
 
+
 @login_required
 def graph_selector(request):
     table = GraphSelectorTable(GraphSelector.objects.all())

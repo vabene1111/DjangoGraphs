@@ -1,6 +1,5 @@
-from audioop import reverse
+from braces.views import GroupRequiredMixin, LoginRequiredMixin
 
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
@@ -10,7 +9,11 @@ from ..forms import *
 from ..models import *
 
 
-class GraphCreate(LoginRequiredMixin, CreateView):
+class GraphUserGroupRequiredMixin(GroupRequiredMixin):
+    group_required = [u"User", ]
+
+
+class GraphCreate(LoginRequiredMixin, GraphUserGroupRequiredMixin, CreateView):
     template_name = "generic/new_template.html"
     model = Graph
     form_class = GraphForm
@@ -31,7 +34,7 @@ class GraphCreate(LoginRequiredMixin, CreateView):
         return context
 
 
-class GraphSelectorCreate(LoginRequiredMixin, CreateView):
+class GraphSelectorCreate(LoginRequiredMixin, GraphUserGroupRequiredMixin, CreateView):
     template_name = "generic/new_template.html"
     model = GraphSelector
     form_class = GraphSelectorForm
@@ -52,7 +55,7 @@ class GraphSelectorCreate(LoginRequiredMixin, CreateView):
         return context
 
 
-class TypeCreate(LoginRequiredMixin, CreateView):
+class TypeCreate(LoginRequiredMixin, GraphUserGroupRequiredMixin, CreateView):
     template_name = "generic/new_template.html"
     model = Type
     form_class = TypeForm
@@ -73,7 +76,7 @@ class TypeCreate(LoginRequiredMixin, CreateView):
         return context
 
 
-class InstanceCreate(LoginRequiredMixin, CreateView):
+class InstanceCreate(LoginRequiredMixin, GraphUserGroupRequiredMixin, CreateView):
     template_name = "generic/new_template.html"
     model = Instance
     form_class = InstanceForm
