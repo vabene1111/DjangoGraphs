@@ -42,7 +42,7 @@
             {% for gd in graph_data %}
                 data.push([
                     {% for dp in gd.data %}
-                        {'date': new Date('{{ dp.timestamp|date:"Y-m-d h:i" }}'), 'value': {{ dp.value }}},
+                        {'date': new Date('{{ dp.timestamp|date:"Y-m-d H:i" }}'), 'value': {{ dp.value }}},
                     {% endfor %}
                 ]);
             {% endfor %}
@@ -73,7 +73,7 @@
                     var pf = d3.format('.0s');
 
                     d3.select('#graph svg .mg-active-datapoint').style('fill', 'white')
-                        .text(moment(d.key).format('hh:mm, DD. MMM YYYY')).attr("x", 0).attr("dy","1.2em");
+                        .text(moment(d.key).format('HH:mm, DD. MMM YYYY')).attr("x", 0).attr("dy","1.2em");
 
                     for (x in d.values) {
                         let line = d.values[x];

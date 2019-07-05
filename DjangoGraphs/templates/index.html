@@ -84,7 +84,7 @@
                             backgroundColor: '#444444',
                             callbacks: {
                                 title: function (tooltipItems, data) {
-                                    return moment(tooltipItems[0].xLabel).format("hh:mm, DD. MMM YYYY");
+                                    return moment(tooltipItems[0].xLabel).format("HH:mm, DD. MMM YYYY");
                                 },
                                 label: function (tooltipItems, data) {
                                     return tooltipItems.yLabel + ' ' + data.datasets[tooltipItems.datasetIndex].suffix;
