@@ -17,7 +17,7 @@ class GraphTable(tables.Table):
 
     class Meta:
         model = Graph
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'public', 'dashboard')
 
 
 class GraphSelectorTable(tables.Table):
