@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load i18n %}
+{% load title_tag %}
 
 <html>
 <head>
@@ -8,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}
+    <title>{% get_title %} - {% block title %}
     {% endblock %}</title>
 
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css" rel="stylesheet"
@@ -78,9 +79,11 @@
 
                     </div>
                 </li>
-
-
-
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'system' %}"><i
+                            class="fas fa-chart-bar"></i> {% trans 'System' %}
+                    </a>
+                </li>
             {% endif %}
         </ul>
 

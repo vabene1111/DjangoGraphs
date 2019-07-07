@@ -1,11 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from datetime import datetime, timedelta
 
 # Create your views here.
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
-from DjangoGraphs.models import Graph, DataEntry, Display
+from DjangoGraphs.forms import SettingsForm
+from DjangoGraphs.models import Graph, DataEntry, Display, Settings
 
 
 def index(request):
@@ -94,3 +96,24 @@ def view_graph_advanced(request, pk):
                            'data': DataEntry.objects.filter(type=s.type, instance=s.instance).all()})
 
     return render(request, 'advanced_graph_view.html', {'graph': graph, 'graph_data': graph_data})
+
+
+@login_required
+def system(request):
+    if not request.user.is_superuser:
+        return HttpResponseRedirect(reverse_lazy('list_graph'))
+
+    if request.method == 'POST':
+        form = SettingsForm(request.POST)
+        if form.is_valid():
+            settings = Settings.objects.get(pk=1)
+            settings.title = form.cleaned_data['title']
+            settings.save()
+
+            return HttpResponseRedirect(reverse_lazy('system'))
+
+    else:
+        settings = Settings.objects.get(pk=1)
+        form = SettingsForm(instance=settings)
+
+    return render(request, 'system.html', {'form': form})

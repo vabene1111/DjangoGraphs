@@ -12,6 +12,8 @@ urlpatterns = [
 
     path('', views.index, name='index'),
 
+    path('system', views.system, name='system'),
+
     path('view/graph/<int:pk>/', views.view_graph, name='view_graph'),
     path('view/graph_advanced/<int:pk>/', views.view_graph_advanced, name='view_graph_advanced'),
 

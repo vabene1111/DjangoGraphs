@@ -68,3 +68,13 @@ class InstanceForm(forms.ModelForm):
             'name': _('Name of the Instance.'),
             'description': _('At the moment just for personal information about this type.'),
         }
+
+
+class SettingsForm(forms.ModelForm):
+    class Meta:
+        model = Settings
+        fields = ('title',)
+
+        help_texts = {
+            'title': _('Base page title of this website.'),
+        }

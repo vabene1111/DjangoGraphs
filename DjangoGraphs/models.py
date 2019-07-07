@@ -62,3 +62,7 @@ class Display(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Settings(models.Model):
+    title = models.CharField(max_length=64, default='')
