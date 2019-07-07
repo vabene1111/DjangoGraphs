@@ -1,12 +1,14 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from datetime import datetime, timedelta
 
-# Create your views here.
+from django.utils.translation import gettext as _
+
 from django.urls import reverse, reverse_lazy
 
-from DjangoGraphs.forms import SettingsForm
+from DjangoGraphs.forms import SettingsForm, InstanceChangeForm, TypeChangeForm
 from DjangoGraphs.models import Graph, DataEntry, Display, Settings
 
 
@@ -101,19 +103,54 @@ def view_graph_advanced(request, pk):
 @login_required
 def system(request):
     if not request.user.is_superuser:
-        return HttpResponseRedirect(reverse_lazy('list_graph'))
+        return HttpResponseRedirect(reverse_lazy('index'))
+
+    type_form = TypeChangeForm()
+    instance_form = InstanceChangeForm()
 
     if request.method == 'POST':
-        form = SettingsForm(request.POST)
-        if form.is_valid():
+        settings_form = SettingsForm(request.POST)
+        if settings_form.is_valid():
             settings = Settings.objects.get(pk=1)
-            settings.title = form.cleaned_data['title']
+            settings.title = settings_form.cleaned_data['title']
             settings.save()
+            # TODO alerts
+            return HttpResponseRedirect(reverse_lazy('system'))
+        # TODO alerts
+    else:
+        settings = Settings.objects.get(pk=1)
+        settings_form = SettingsForm(instance=settings)
+
+    return render(request, 'system.html', {'settings_form': settings_form, 'type_form': type_form, 'instance_form': instance_form})
+
+
+@login_required
+def system_change_type(request):
+    if not request.user.is_superuser:
+        return HttpResponseRedirect(reverse_lazy('index'))
+
+    if request.method == 'POST':
+        type_form = TypeChangeForm(request.POST)
+        if type_form.is_valid():
+            DataEntry.objects.filter(type=type_form.cleaned_data['old_type']).update(type=type_form.cleaned_data['new_type'])
+            messages.add_message(request, messages.SUCCESS, _('Types updated!'))
 
             return HttpResponseRedirect(reverse_lazy('system'))
 
-    else:
-        settings = Settings.objects.get(pk=1)
-        form = SettingsForm(instance=settings)
+    return HttpResponseRedirect(reverse_lazy('system'))
 
-    return render(request, 'system.html', {'form': form})
+
+@login_required
+def system_change_instance(request):
+    if not request.user.is_superuser:
+        return HttpResponseRedirect(reverse_lazy('index'))
+
+    if request.method == 'POST':
+        instance_form = InstanceChangeForm(request.POST)
+        if instance_form.is_valid():
+            DataEntry.objects.filter(instance=instance_form.cleaned_data['old_instance']).update(instance=instance_form.cleaned_data['new_instance'])
+            messages.add_message(request, messages.SUCCESS, _('Instances updated!'))
+
+            return HttpResponseRedirect(reverse_lazy('system'))
+
+    return HttpResponseRedirect(reverse_lazy('system'))

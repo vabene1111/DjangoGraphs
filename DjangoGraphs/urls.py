@@ -13,6 +13,8 @@ urlpatterns = [
     path('', views.index, name='index'),
 
     path('system', views.system, name='system'),
+    path('system/type', views.system_change_type, name='system_type'),
+    path('system/instance', views.system_change_instance, name='system_instance'),
 
     path('view/graph/<int:pk>/', views.view_graph, name='view_graph'),
     path('view/graph_advanced/<int:pk>/', views.view_graph_advanced, name='view_graph_advanced'),

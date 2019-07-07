@@ -10,10 +10,29 @@
 
     <form action="{% url 'system' %}" method="post">
         {% csrf_token %}
-        {{ form|crispy }}
+        {{ settings_form|crispy }}
 
         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {% trans 'Save' %}</button>
     </form>
 
     <h2>{% trans 'Key Changes' %}</h2>
+    <div class="alert alert-danger">
+    {% blocktrans %}
+        This section allows you to change all key in your database. All changes done here can <b>NOT</b> be reverted so
+        use this with caution and on your own risk.
+    {% endblocktrans %}
+    </div>
+
+    <form action="{% url 'system_type' %}" method="post">
+        {% csrf_token %}
+        {{ type_form|crispy }}
+        <button type="submit" class="btn btn-warning"><i class="fas fa-save"></i> {% trans 'Update types' %}</button>
+    </form>
+
+     <form action="{% url 'system_instance' %}" method="post">
+        {% csrf_token %}
+        {{ instance_form|crispy }}
+        <button type="submit" class="btn btn-warning"><i class="fas fa-save"></i> {% trans 'Update instances' %}</button>
+    </form>
+
 {% endblock %}

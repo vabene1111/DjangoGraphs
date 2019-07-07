@@ -27,7 +27,7 @@ class DataEntry(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return str(self.timestamp) + ' : ' + str(self.value)
+        return str(self.timestamp) + ' Type: ' + str(self.type) + ' Instance: ' + str(self.instance) + ' : ' + str(round(self.value))
 
 
 class GraphSelector(models.Model):

@@ -78,3 +78,13 @@ class SettingsForm(forms.ModelForm):
         help_texts = {
             'title': _('Base page title of this website.'),
         }
+
+
+class TypeChangeForm(forms.Form):
+    old_type = forms.ModelChoiceField(Type.objects.all(), label=_('Old type'), help_text=_('All entries associated with this type will be changed to the new type'))
+    new_type = forms.ModelChoiceField(Type.objects.all(), label=_('New type'))
+
+
+class InstanceChangeForm(forms.Form):
+    old_instance = forms.ModelChoiceField(Instance.objects.all(), label=_('Old instance'), help_text=_('All entries associated with this instance will be changed to the new instance'))
+    new_instance = forms.ModelChoiceField(Instance.objects.all(), label=_('New instance'))
