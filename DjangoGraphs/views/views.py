@@ -34,7 +34,7 @@ def index(request):
                                      'label': label,
                                      'color': s.color,
                                      'unit': s.type.unit,
-                                     'data': DataEntry.objects.filter(type=s.type, instance=s.instance, timestamp__gt=time_threshold).all()})
+                                     'data': DataEntry.objects.filter(type=s.type, instance=s.instance, timestamp__gt=time_threshold).order_by('timestamp').all()})
 
     display_data = []
     for d in displays:
@@ -73,7 +73,7 @@ def view_graph(request, pk):
                            'label': label,
                            'color': s.color,
                            'unit': s.type.unit,
-                           'data': DataEntry.objects.filter(type=s.type, instance=s.instance, timestamp__gt=time_threshold).all()})
+                           'data': DataEntry.objects.filter(type=s.type, instance=s.instance, timestamp__gt=time_threshold).order_by('timestamp').all()})
 
     return render(request, 'graph_view.html', {'graph': graph, 'graph_data': graph_data})
 
@@ -95,7 +95,7 @@ def view_graph_advanced(request, pk):
                            'label': label,
                            'color': s.color,
                            'unit': s.type.unit,
-                           'data': DataEntry.objects.filter(type=s.type, instance=s.instance).all()})
+                           'data': DataEntry.objects.filter(type=s.type, instance=s.instance).order_by('timestamp').all()})
 
     return render(request, 'advanced_graph_view.html', {'graph': graph, 'graph_data': graph_data})
 

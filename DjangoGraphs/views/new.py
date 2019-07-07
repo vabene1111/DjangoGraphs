@@ -93,7 +93,7 @@ class InstanceCreate(LoginRequiredMixin, GraphUserGroupRequiredMixin, CreateView
 
     def get_context_data(self, **kwargs):
         context = super(InstanceCreate, self).get_context_data(**kwargs)
-        context['title'] = _("Display")
+        context['title'] = _("Instance")
         return context
 
 
