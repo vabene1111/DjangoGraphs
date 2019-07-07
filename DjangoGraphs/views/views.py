@@ -5,14 +5,16 @@ from datetime import datetime, timedelta
 # Create your views here.
 from django.urls import reverse
 
-from DjangoGraphs.models import Graph, DataEntry
+from DjangoGraphs.models import Graph, DataEntry, Display
 
 
 def index(request):
     graphs = Graph.objects.filter(dashboard=True).all()
+    displays = Display.objects.filter(dashboard=True).all()
 
     if not request.user.is_authenticated:
         graphs = Graph.objects.filter(dashboard=True, public=True).all()
+        displays = Display.objects.filter(dashboard=True, public=True).all()
 
     time_threshold = datetime.now() - timedelta(hours=24)
 
@@ -30,7 +32,22 @@ def index(request):
                                      'unit': s.type.unit,
                                      'data': DataEntry.objects.filter(type=s.type, instance=s.instance, timestamp__gt=time_threshold).all()})
 
-    return render(request, 'index.html', {'graphs': graphs, 'graph_data': graph_data})
+    display_data = []
+    for d in displays:
+        entry = DataEntry.objects.filter(type=d.selector.type, instance=d.selector.instance).latest('timestamp')
+
+        label = d.name
+        if d.title:
+            label = d.title
+
+        display_data.append({
+            'id': d.pk,
+            'label': label,
+            'value': entry.value,
+            'unit': d.selector.type.unit,
+        })
+
+    return render(request, 'index.html', {'graphs': graphs, 'graph_data': graph_data, 'display_data': display_data})
 
 
 def view_graph(request, pk):
