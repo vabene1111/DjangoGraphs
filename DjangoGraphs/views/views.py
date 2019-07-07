@@ -13,19 +13,19 @@ from DjangoGraphs.models import Graph, DataEntry, Display, Settings
 
 
 def index(request):
-    graphs = Graph.objects.filter(dashboard=True).all()
-    displays = Display.objects.filter(dashboard=True).all()
+    graphs = Graph.objects.filter(dashboard=True).order_by('-order', 'pk').all()
+    displays = Display.objects.filter(dashboard=True).order_by('-order', 'pk').all()
 
     if not request.user.is_authenticated:
-        graphs = Graph.objects.filter(dashboard=True, public=True).all()
-        displays = Display.objects.filter(dashboard=True, public=True).all()
+        graphs = Graph.objects.filter(dashboard=True, public=True).order_by('-order', 'pk').all()
+        displays = Display.objects.filter(dashboard=True, public=True).order_by('-order', 'pk').all()
 
     time_threshold = datetime.now() - timedelta(hours=24)
 
     graph_data = {}
     for g in graphs:
         graph_data[g.pk] = []
-        for s in g.selector.all():
+        for s in g.selector.order_by('-order', 'pk').all():
             label = s.name
             if s.title:
                 label = s.title
@@ -64,7 +64,7 @@ def view_graph(request, pk):
             return HttpResponseRedirect(reverse('login'))
 
     graph_data = []
-    for s in graph.selector.all():
+    for s in graph.selector.order_by('-order', 'pk').all():
         label = s.name
         if s.title:
             label = s.title
@@ -86,7 +86,7 @@ def view_graph_advanced(request, pk):
             return HttpResponseRedirect(reverse('login'))
 
     graph_data = []
-    for s in graph.selector.all():
+    for s in graph.selector.order_by('-order', 'pk').all():
         label = s.name
         if s.title:
             label = s.title

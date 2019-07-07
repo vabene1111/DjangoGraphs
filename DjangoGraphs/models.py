@@ -35,6 +35,7 @@ class GraphSelector(models.Model):
     title = models.CharField(max_length=64, default='', blank=True)
     type = models.ForeignKey(Type, on_delete=models.PROTECT)
     instance = models.ForeignKey(Instance, on_delete=models.PROTECT)
+    order = models.IntegerField(default=0)
 
     color = models.CharField(max_length=7, default='#FFFFFF')
 
@@ -49,6 +50,8 @@ class Graph(models.Model):
     public = models.BooleanField(default=False)
     selector = models.ManyToManyField(GraphSelector)
 
+    order = models.IntegerField(default=0)
+
     def __str__(self):
         return self.name
 
@@ -59,6 +62,8 @@ class Display(models.Model):
     dashboard = models.BooleanField(default=False)
     public = models.BooleanField(default=False)
     selector = models.ForeignKey(GraphSelector, on_delete=models.PROTECT)
+
+    order = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

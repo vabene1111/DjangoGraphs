@@ -8,7 +8,7 @@ from .models import *
 class GraphForm(forms.ModelForm):
     class Meta:
         model = Graph
-        fields = ('name', 'title', 'dashboard', 'public', 'selector')
+        fields = ('name', 'title', 'dashboard', 'public', 'selector', 'order')
 
         help_texts = {
             'name': _('Name of the Graph. Is displayed if no title is given.'),
@@ -16,13 +16,14 @@ class GraphForm(forms.ModelForm):
             'dashboard': _('If true, this graph is displayed on the home page.'),
             'public': _('If true, this graph can be seen by everyone.'),
             'selector': _('Choose any number of selectors that should be displayed in this graph.'),
+            'order': _('Higher order Graphs are loaded before lower order Graphs. If empty order is defined by the id.'),
         }
 
 
 class DisplayForm(forms.ModelForm):
     class Meta:
         model = Display
-        fields = ('name', 'title', 'dashboard', 'public', 'selector')
+        fields = ('name', 'title', 'dashboard', 'public', 'selector', 'order')
 
         help_texts = {
             'name': _('Name of the Graph. Is displayed if no title is given.'),
@@ -30,13 +31,14 @@ class DisplayForm(forms.ModelForm):
             'public': _('If true, this display can be seen by everyone.'),
             'dashboard': _('If true, this display is displayed on the home page.'),
             'selector': _('Choose the selector that is displayed by the display.'),
+            'order': _('Higher order Displays are loaded before lower order Displays. If empty order is defined by the id.'),
         }
 
 
 class GraphSelectorForm(forms.ModelForm):
     class Meta:
         model = GraphSelector
-        fields = ('name', 'title', 'type', 'instance', 'color')
+        fields = ('name', 'title', 'type', 'instance', 'color', 'order')
         widgets = {'color': TextInput(attrs={'type': 'color'})}
         help_texts = {
             'name': _('Name of the Selector. Is displayed if no title is given.'),
@@ -44,6 +46,7 @@ class GraphSelectorForm(forms.ModelForm):
             'type': _('Which type of data should be selected.'),
             'instance': _('From which instance should the data be selected.'),
             'color': _('Choose the color that this selector should use.'),
+            'order': _('Higher order Graph Selectors are loaded before lower order Graph Selectors. If empty order is defined by the id.'),
         }
 
 
