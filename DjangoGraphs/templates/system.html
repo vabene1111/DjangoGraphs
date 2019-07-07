@@ -15,6 +15,9 @@
         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {% trans 'Save' %}</button>
     </form>
 
+    <br/>
+    <br/>
+
     <h2>{% trans 'Key Changes' %}</h2>
     <div class="alert alert-danger">
     {% blocktrans %}
@@ -28,6 +31,9 @@
         {{ type_form|crispy }}
         <button type="submit" class="btn btn-warning"><i class="fas fa-save"></i> {% trans 'Update types' %}</button>
     </form>
+
+    <br/>
+    <br/>
 
      <form action="{% url 'system_instance' %}" method="post">
         {% csrf_token %}
