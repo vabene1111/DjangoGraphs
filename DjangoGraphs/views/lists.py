@@ -41,3 +41,11 @@ def instance(request):
     RequestConfig(request, paginate={'per_page': 25}).configure(table)
 
     return render(request, 'generic/list_template.html', {'title': _("Instances"), 'table': table})
+
+
+@login_required
+def display(request):
+    table = DisplayTable(Display.objects.all())
+    RequestConfig(request, paginate={'per_page': 25}).configure(table)
+
+    return render(request, 'generic/list_template.html', {'title': _("Display"), 'table': table})

@@ -11,6 +11,12 @@ class GraphForm(forms.ModelForm):
         fields = ('name', 'title', 'dashboard', 'public', 'selector')
 
 
+class DisplayForm(forms.ModelForm):
+    class Meta:
+        model = Display
+        fields = ('name', 'title', 'dashboard', 'public', 'selector')
+
+
 class GraphSelectorForm(forms.ModelForm):
     class Meta:
         model = GraphSelector

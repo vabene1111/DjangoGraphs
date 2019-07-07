@@ -102,6 +102,28 @@ class InstanceUpdate(LoginRequiredMixin, GraphUserGroupRequiredMixin, UpdateView
         return context
 
 
+class DisplayUpdate(LoginRequiredMixin, GraphUserGroupRequiredMixin, UpdateView):
+    model = Display
+    form_class = DisplayForm
+    template_name = "generic/edit_template.html"
+
+    def form_valid(self, form):
+        messages.add_message(self.request, messages.SUCCESS, _('Changes saved!'))
+        return super(DisplayUpdate, self).form_valid(form)
+
+    def form_invalid(self, form):
+        messages.add_message(self.request, messages.ERROR, _('Error saving changes!'))
+        return super(DisplayUpdate, self).form_invalid(form)
+
+    def get_success_url(self):
+        return reverse('edit_display', kwargs={'pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super(DisplayUpdate, self).get_context_data(**kwargs)
+        context['title'] = _('Display')
+        return context
+
+
 # Generic Delete views
 
 def delete_redirect(request, name, pk):
@@ -149,4 +171,15 @@ class InstanceDelete(LoginRequiredMixin, GraphUserGroupRequiredMixin, DeleteView
     def get_context_data(self, **kwargs):
         context = super(InstanceDelete, self).get_context_data(**kwargs)
         context['title'] = _("Instance")
+        return context
+
+
+class DisplayDelete(LoginRequiredMixin, GraphUserGroupRequiredMixin, DeleteView):
+    template_name = "generic/delete_template.html"
+    model = Display
+    success_url = reverse_lazy('list_display')
+
+    def get_context_data(self, **kwargs):
+        context = super(DisplayDelete, self).get_context_data(**kwargs)
+        context['title'] = _("Display")
         return context

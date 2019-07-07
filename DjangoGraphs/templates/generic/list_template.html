@@ -22,6 +22,9 @@
             {% if table.Meta.model|get_class == 'Instance' %}
                 <a href="{% url 'new_instance' %}"><i class="fas fa-plus-circle"></i></a>
             {% endif %}
+            {% if table.Meta.model|get_class == 'Display' %}
+                <a href="{% url 'new_display' %}"><i class="fas fa-plus-circle"></i></a>
+            {% endif %}
         {% endif %}
     </h3>
     <br/>

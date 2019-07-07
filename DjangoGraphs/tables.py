@@ -54,3 +54,15 @@ class InstanceTable(tables.Table):
     class Meta:
         model = Instance
         fields = ('id', 'name')
+
+
+class DisplayTable(tables.Table):
+    id = tables.LinkColumn('edit_display', args=[A('id')])
+
+    options = tables.TemplateColumn(
+        "<a href='{% url 'delete_display' record.id %}' class='btn btn-danger'><i class='fas fa-trash'></i></a>",
+        verbose_name=_('Options'))
+
+    class Meta:
+        model = Display
+        fields = ('id', 'name')

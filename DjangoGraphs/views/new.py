@@ -93,5 +93,26 @@ class InstanceCreate(LoginRequiredMixin, GraphUserGroupRequiredMixin, CreateView
 
     def get_context_data(self, **kwargs):
         context = super(InstanceCreate, self).get_context_data(**kwargs)
-        context['title'] = _("Graph")
+        context['title'] = _("Display")
+        return context
+
+
+class DisplayCreate(LoginRequiredMixin, GraphUserGroupRequiredMixin, CreateView):
+    template_name = "generic/new_template.html"
+    model = Display
+    form_class = DisplayForm
+
+    success_url = reverse_lazy('list_display')
+
+    def form_valid(self, form):
+        messages.add_message(self.request, messages.SUCCESS, _('Changes saved!'))
+        return super(DisplayCreate, self).form_valid(form)
+
+    def form_invalid(self, form):
+        messages.add_message(self.request, messages.ERROR, _('Error saving changes!'))
+        return super(DisplayCreate, self).form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(DisplayCreate, self).get_context_data(**kwargs)
+        context['title'] = _("Display")
         return context
