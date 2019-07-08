@@ -42,9 +42,11 @@
             data = [];
             {% for gd in graph_data %}
                 data.push([
+                {% language 'en'%}
                     {% for dp in gd.data %}
                         {'date': new Date('{{ dp.timestamp|date:"Y-m-d H:i" }}'), 'value': {{ dp.value|floatformat:1|unlocalize  }}},
                     {% endfor %}
+                 {% endlanguage %}
                 ]);
             {% endfor %}
 

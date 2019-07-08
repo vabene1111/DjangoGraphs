@@ -36,9 +36,11 @@
                     suffix: '{{ gd.unit }}',
                     borderColor: '{{ gd.color }}',
                     data: [
-                        {% for dp in gd.data %}
-                            {x: '{{ dp.timestamp|date:"Y-m-d H:i" }}', y: '{{ dp.value|floatformat:1|unlocalize }}'},
-                        {% endfor %}
+                        {% language 'en'%}
+                            {% for dp in gd.data %}
+                                {x: '{{ dp.timestamp|date:"Y-m-d H:i" }}', y: '{{ dp.value|floatformat:1 }}'},
+                            {% endfor %}
+                        {% endlanguage %}
                     ]
                 });
 
