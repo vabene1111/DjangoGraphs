@@ -43,7 +43,13 @@ If you want to install it without docker you can follow a tutorial like [this on
 
 ### Updating
 
+**ALWAYS** backup your database before updating!
+
 To update using the default settings simply `git pull` and run `sh update.sh`.
+
+Some updates might require to rebuild the container if new requirements where added.
+
+Postgresql container updates can cause database incompatibilities. To update create a db dump before updating and import it afterwards.
 
 ## License
 
