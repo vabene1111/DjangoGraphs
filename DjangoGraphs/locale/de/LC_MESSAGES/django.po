@@ -1,0 +1,378 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-07-08 18:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\DjangoGraphs\forms.py:14 .\DjangoGraphs\forms.py:29
+msgid "Name of the Graph. Is displayed if no title is given."
+msgstr "Names des Graphen. Wird angezeigt wenn kein Titel angegeben ist."
+
+#: .\DjangoGraphs\forms.py:15
+msgid ""
+"If not all information contained in the name should be displayed in the "
+"graph, set a title."
+msgstr ""
+"Wenn nicht alle informationen im Namen auch angezeigt werden sollen, kann ein Titel gesetzt werden."
+
+#: .\DjangoGraphs\forms.py:16
+msgid "If true, this graph is displayed on the home page."
+msgstr "Wenn aktiviert wird der Graph auf der Startseite angezeigt."
+
+#: .\DjangoGraphs\forms.py:17
+msgid "If true, this graph can be seen by everyone."
+msgstr "Wenn aktiviert kann der Graph von jedem gesehen werden."
+
+#: .\DjangoGraphs\forms.py:18
+msgid "Choose any number of selectors that should be displayed in this graph."
+msgstr "Wähle eine beliebige anzahl Selektoren welche in diesem Graphen angezeigt werden sollen."
+
+#: .\DjangoGraphs\forms.py:19
+msgid ""
+"Higher order Graphs are loaded before lower order Graphs. If empty order is "
+"defined by the id."
+msgstr ""
+"Graphen mit einer höheren Ordnung werden vor Graphen mit einer niedriegeren angezigt."
+"Wenn keine Ordnung angegeben ist wird die Id genutzt."
+
+#: .\DjangoGraphs\forms.py:30
+msgid ""
+"If not all information contained in the name should be displayed in the "
+"display, set a title."
+msgstr ""
+"Wenn nicht alle informationen im Namen auch angezeigt werden sollen, kann ein Titel gesetzt werden."
+
+#: .\DjangoGraphs\forms.py:31
+msgid "If true, this display can be seen by everyone."
+msgstr "Wenn aktiviert kann das Display von jedem gesehen werden."
+
+#: .\DjangoGraphs\forms.py:32
+msgid "If true, this display is displayed on the home page."
+msgstr "Wenn aktiviert wird das Display auf der Startseite angezeigt."
+
+#: .\DjangoGraphs\forms.py:33
+msgid "Choose the selector that is displayed by the display."
+msgstr "Wähle den Selektor der von diesem Display angezeigt werden soll."
+
+#: .\DjangoGraphs\forms.py:34
+msgid ""
+"Higher order Displays are loaded before lower order Displays. If empty order "
+"is defined by the id."
+msgstr ""
+"Displays mit einer höheren Ordnung werden vor Displays mit einer niedriegeren angezigt."
+"Wenn keine Ordnung angegeben ist wird die Id genutzt."
+
+#: .\DjangoGraphs\forms.py:44
+msgid "Name of the Selector. Is displayed if no title is given."
+msgstr "Names des Selekors. Wird angezeigt wenn kein Titel eingestellt ist."
+
+#: .\DjangoGraphs\forms.py:45
+msgid ""
+"If not all information contained in the name should be displayed in the "
+"selector, set a title."
+msgstr ""
+"Wenn nicht alle informationen im Namen auch angezeigt werden sollen, kann ein Titel gesetzt werden."
+
+#: .\DjangoGraphs\forms.py:46
+msgid "Which type of data should be selected."
+msgstr "Welcher Typ von Daten soll selektiert werden."
+
+#: .\DjangoGraphs\forms.py:47
+msgid "From which instance should the data be selected."
+msgstr "Von welcher Instanz sollen die Daten angezeigt werden."
+
+#: .\DjangoGraphs\forms.py:48
+msgid "Choose the color that this selector should use."
+msgstr "Farbe in der dieser Selektor angezeigt werden soll."
+
+#: .\DjangoGraphs\forms.py:49
+msgid ""
+"Higher order Graph Selectors are loaded before lower order Graph Selectors. "
+"If empty order is defined by the id."
+msgstr ""
+"Graph Selektoren mit einer höheren Ordnung werden vor Graph Selektoren mit einer niedriegeren angezigt."
+"Wenn keine Ordnung angegeben ist wird die Id genutzt."
+
+#: .\DjangoGraphs\forms.py:59
+msgid "Name of the Type."
+msgstr "Name des Typs"
+
+#: .\DjangoGraphs\forms.py:60 .\DjangoGraphs\forms.py:72
+msgid "At the moment just for personal information about this type."
+msgstr "Aktuell nur für notzitzen über den Typen."
+
+#: .\DjangoGraphs\forms.py:61
+msgid "Unit displayed alongside data of this type."
+msgstr "Einheit welche zusammen mit diesem Typ genutzt werden soll."
+
+#: .\DjangoGraphs\forms.py:71
+msgid "Name of the Instance."
+msgstr "Name der Instanz"
+
+#: .\DjangoGraphs\forms.py:82
+msgid "Base page title of this website."
+msgstr "Websiten Titel"
+
+#: .\DjangoGraphs\forms.py:87
+msgid "Old type"
+msgstr "Alter Typ"
+
+#: .\DjangoGraphs\forms.py:87
+msgid "All entries associated with this type will be changed to the new type."
+msgstr "Alle Einträge mit diesem Typ werden auf den neuen Typ überschrieben."
+
+#: .\DjangoGraphs\forms.py:88
+msgid "New type"
+msgstr "Neuer Typ"
+
+#: .\DjangoGraphs\forms.py:92
+msgid "Old instance"
+msgstr "Alte Instanz"
+
+#: .\DjangoGraphs\forms.py:92
+msgid ""
+"All entries associated with this instance will be changed to the new instance"
+msgstr "Alle Einträge mit dieser Instanz werden auf die neue Instanz überschrieben."
+
+#: .\DjangoGraphs\forms.py:93
+msgid "New instance"
+msgstr "Neue Instanz"
+
+#: .\DjangoGraphs\tables.py:16 .\DjangoGraphs\tables.py:28
+#: .\DjangoGraphs\tables.py:40 .\DjangoGraphs\tables.py:52
+#: .\DjangoGraphs\tables.py:64
+msgid "Options"
+msgstr "Optionen"
+
+#: .\DjangoGraphs\templates\advanced_graph_view.html:6
+#: .\DjangoGraphs\templates\graph_view.html:5
+msgid "DjangoGraphs"
+msgstr ""
+
+#: .\DjangoGraphs\templates\base.html:46 .\DjangoGraphs\templates\index.html:5
+msgid "Home"
+msgstr ""
+
+#: .\DjangoGraphs\templates\base.html:49 .\DjangoGraphs\views\lists.py:19
+msgid "Graphs"
+msgstr "Graphen"
+
+#: .\DjangoGraphs\templates\base.html:56
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#: .\DjangoGraphs\templates\base.html:60
+msgid "Displays"
+msgstr ""
+
+#: .\DjangoGraphs\templates\base.html:62 .\DjangoGraphs\views\lists.py:27
+msgid "Graph Selectors"
+msgstr "Graph Selektoren"
+
+#: .\DjangoGraphs\templates\base.html:64 .\DjangoGraphs\views\lists.py:35
+msgid "Types"
+msgstr "Typen"
+
+#: .\DjangoGraphs\templates\base.html:66 .\DjangoGraphs\views\lists.py:43
+msgid "Instances"
+msgstr "Instanzen"
+
+#: .\DjangoGraphs\templates\base.html:72
+msgid "API"
+msgstr ""
+
+#: .\DjangoGraphs\templates\base.html:76 .\DjangoGraphs\templates\user.html:50
+msgid "API Browser"
+msgstr ""
+
+#: .\DjangoGraphs\templates\base.html:78 .\DjangoGraphs\templates\user.html:52
+msgid "API Docs"
+msgstr "API Dokumentation"
+
+#: .\DjangoGraphs\templates\base.html:84
+#: .\DjangoGraphs\templates\system.html:6
+msgid "System"
+msgstr ""
+
+#: .\DjangoGraphs\templates\base.html:92
+msgid "Account"
+msgstr ""
+
+#: .\DjangoGraphs\templates\base.html:98
+msgid "Admin"
+msgstr ""
+
+#: .\DjangoGraphs\templates\base.html:105
+msgid "Logout"
+msgstr ""
+
+#: .\DjangoGraphs\templates\base.html:109
+msgid "Login"
+msgstr ""
+
+#: .\DjangoGraphs\templates\generic\delete_template.html:5
+#: .\DjangoGraphs\templates\generic\delete_template.html:13
+#: .\DjangoGraphs\templates\generic\delete_template.html:21
+#: .\DjangoGraphs\templates\generic\edit_template.html:27
+msgid "Delete"
+msgstr "Löschen"
+
+#: .\DjangoGraphs\templates\generic\delete_template.html:18
+#, python-format
+msgid "Are you sure you want to delete the %(title)s: <b>%(object)s</b> "
+msgstr "Bist du sicher das die objekte vom typ %(title)s löschen willst: <b>%(object)s</b> "
+
+#: .\DjangoGraphs\templates\generic\delete_template.html:22
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: .\DjangoGraphs\templates\generic\edit_template.html:6
+#: .\DjangoGraphs\templates\generic\edit_template.html:14
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: .\DjangoGraphs\templates\generic\edit_template.html:21
+#: .\DjangoGraphs\templates\generic\language_chooser.html:23
+#: .\DjangoGraphs\templates\generic\new_template.html:19
+#: .\DjangoGraphs\templates\system.html:15
+#: .\DjangoGraphs\templates\user.html:25
+msgid "Save"
+msgstr "Speichern"
+
+#: .\DjangoGraphs\templates\generic\language_chooser.html:5
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: .\DjangoGraphs\templates\generic\list_template.html:7
+#: .\DjangoGraphs\templates\generic\list_template.html:11
+msgid "List"
+msgstr "Liste"
+
+#: .\DjangoGraphs\templates\generic\new_template.html:6
+msgid "New"
+msgstr "Neu"
+
+#: .\DjangoGraphs\templates\registration\login.html:8
+msgid "Your username and password didn't match. Please try again."
+msgstr "Benutzername und Passwort stimmen nicht überein. Bitte erneut versuchen."
+
+#: .\DjangoGraphs\templates\system.html:9
+msgid "System Settings"
+msgstr "System Einstellungen"
+
+#: .\DjangoGraphs\templates\system.html:21
+msgid "Key Changes"
+msgstr "Schlüssel Änderungen"
+
+#: .\DjangoGraphs\templates\system.html:23
+msgid ""
+"\n"
+"        This section allows you to change all key in your database. All "
+"changes done here can <b>NOT</b> be reverted so\n"
+"        use this with caution and on your own risk.\n"
+"    "
+msgstr ""
+"\n"
+"        Dieser Bereich erlaubt es alle Schlüssel in der Datenbank zu ändern. Alle "
+"Änderungen hier können <b>NICHT</b> rückgängig gemacht werden.\n"
+"        Benutzung auf eigene Gefahr.\n"
+"    "
+
+#: .\DjangoGraphs\templates\system.html:32
+msgid "Update types"
+msgstr "Typen umschreiben"
+
+#: .\DjangoGraphs\templates\system.html:41
+msgid "Update instances"
+msgstr "Instanzen umschreiben"
+
+#: .\DjangoGraphs\templates\user.html:6
+msgid "User"
+msgstr "Benutzer"
+
+#: .\DjangoGraphs\templates\user.html:9
+msgid "Language"
+msgstr "Sprache"
+
+#: .\DjangoGraphs\templates\user.html:32
+msgid "API Token"
+msgstr ""
+
+#: .\DjangoGraphs\templates\user.html:35
+msgid "Your token"
+msgstr "Dein Token"
+
+#: .\DjangoGraphs\templates\user.html:42
+msgid ""
+"To use the authorization token use the HTTP <code>Authorization</code> "
+"header with your API\n"
+"                token like this "
+msgstr ""
+"Um das Token zu benutzen muss der HTTP Header <code>Authorization</code> "
+"gesetzt werden. Beispiel:"
+
+#: .\DjangoGraphs\views\edit.py:23 .\DjangoGraphs\views\edit.py:45
+#: .\DjangoGraphs\views\edit.py:67 .\DjangoGraphs\views\edit.py:89
+#: .\DjangoGraphs\views\edit.py:111 .\DjangoGraphs\views\new.py:24
+#: .\DjangoGraphs\views\new.py:45 .\DjangoGraphs\views\new.py:66
+#: .\DjangoGraphs\views\new.py:87 .\DjangoGraphs\views\new.py:108
+msgid "Changes saved!"
+msgstr "Änderungen gespeichert"
+
+#: .\DjangoGraphs\views\edit.py:27 .\DjangoGraphs\views\edit.py:49
+#: .\DjangoGraphs\views\edit.py:71 .\DjangoGraphs\views\edit.py:93
+#: .\DjangoGraphs\views\edit.py:115 .\DjangoGraphs\views\new.py:28
+#: .\DjangoGraphs\views\new.py:49 .\DjangoGraphs\views\new.py:70
+#: .\DjangoGraphs\views\new.py:91 .\DjangoGraphs\views\new.py:112
+msgid "Error saving changes!"
+msgstr "Fehler beim speichern!"
+
+#: .\DjangoGraphs\views\edit.py:35 .\DjangoGraphs\views\edit.py:140
+#: .\DjangoGraphs\views\new.py:33
+msgid "Graph"
+msgstr "Graph"
+
+#: .\DjangoGraphs\views\edit.py:57 .\DjangoGraphs\views\edit.py:151
+#: .\DjangoGraphs\views\new.py:54
+msgid "Graph Selector"
+msgstr "Graph Selektor"
+
+#: .\DjangoGraphs\views\edit.py:79 .\DjangoGraphs\views\edit.py:162
+#: .\DjangoGraphs\views\new.py:75
+msgid "Type"
+msgstr "Typ"
+
+#: .\DjangoGraphs\views\edit.py:101 .\DjangoGraphs\views\edit.py:173
+#: .\DjangoGraphs\views\new.py:96
+msgid "Instance"
+msgstr "Instanz"
+
+#: .\DjangoGraphs\views\edit.py:123 .\DjangoGraphs\views\edit.py:184
+#: .\DjangoGraphs\views\lists.py:51 .\DjangoGraphs\views\new.py:117
+msgid "Display"
+msgstr ""
+
+#: .\DjangoGraphs\views\views.py:137
+msgid "Types updated!"
+msgstr "Typen umgeschrieben!"
+
+#: .\DjangoGraphs\views\views.py:153
+msgid "Instances updated!"
+msgstr "Instanzen umgeschrieben!"
+
+#: .\DjangoGraphs\views\views.py:163
+msgid "You do not have the required permissions to perform this action!"
+msgstr "Du hast nicht die benötigten Rechte um diese Aktion durchzuführen!"
