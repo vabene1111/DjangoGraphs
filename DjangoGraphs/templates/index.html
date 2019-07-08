@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load l10n %}
 {% load class_tag %}
 
 {% block title %}{% trans 'Home' %}{% endblock %}
@@ -52,7 +53,7 @@
                         borderColor: '{{ gd.color }}',
                         data: [
                             {% for dp in gd.data %}
-                                {x: '{{ dp.timestamp|date:"Y-m-d H:i" }}', y: '{{ dp.value|floatformat:1 }}'},
+                                {x: '{{ dp.timestamp|date:"Y-m-d H:i" }}', y: '{{ dp.value|floatformat:1|unlocalize }}'},
                             {% endfor %}
                         ]
                     });

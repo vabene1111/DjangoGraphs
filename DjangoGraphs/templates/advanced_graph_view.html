@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load i18n %}
+{% load l10n %}
 {% load class_tag %}
 
 {% block title %}{% trans 'DjangoGraphs' %}{% endblock %}
@@ -42,7 +43,7 @@
             {% for gd in graph_data %}
                 data.push([
                     {% for dp in gd.data %}
-                        {'date': new Date('{{ dp.timestamp|date:"Y-m-d H:i" }}'), 'value': {{ dp.value|floatformat:1  }}},
+                        {'date': new Date('{{ dp.timestamp|date:"Y-m-d H:i" }}'), 'value': {{ dp.value|floatformat:1|unlocalize  }}},
                     {% endfor %}
                 ]);
             {% endfor %}
