@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from datetime import datetime, timedelta
+from rest_framework.authtoken.models import Token
 
 from django.utils.translation import gettext as _
 
@@ -154,3 +155,14 @@ def system_change_instance(request):
             return HttpResponseRedirect(reverse_lazy('system'))
 
     return HttpResponseRedirect(reverse_lazy('system'))
+
+
+@login_required
+def account(request):
+    if not request.user.groups.filter(name='User').exists() and not request.user.is_superuser:
+        messages.add_message(request, messages.ERROR, _('You do not have the required permissions to perform this action!'))
+        return HttpResponseRedirect(reverse_lazy('index'))
+
+    token, created = Token.objects.get_or_create(user=request.user)
+
+    return render(request, 'user.html', {'token': token})

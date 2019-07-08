@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load class_tag %}
+
+{% block title %}{% trans 'User' %}{% endblock %}
+
+{% block content %}
+    <h2>{% trans 'Language' %}</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                <input class="form-control" name="next" type="hidden" value="{{ redirect_to }}">
+                <select name="language" class="form-control">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                            {{ language.name_local }} ({{ language.code }})
+                        </option>
+                    {% endfor %}
+                </select>
+                <br/>
+                <input type="submit" value="{% trans 'Save' %}" class="btn btn-success">
+            </form>
+        </div>
+
+    </div>
+
+    <br/>
+    <h2>{% trans 'API Token' %}</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <label for="api_token">{% trans 'Your token' %}</label>
+            <input id="api_token" class="form-control" value="{{ token }}">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {% blocktrans %}To use the authorization token use the HTTP <code>Authorization</code> header with your API
+                token like this {% endblocktrans %} <code>Authorization: Token [Your Token]</code>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12">
+            <a class="" href="{% url 'api-root' %}" target="_blank"><i
+                    class="fas fa-laptop-code"></i> {% trans 'API Browser' %}</a> -
+            <a class="" href="{% url 'api-docs:docs-index' %}" target="_blank"><i
+                    class="fas fa-book"></i> {% trans 'API Docs' %}</a>
+        </div>
+    </div>
+
+{% endblock %}

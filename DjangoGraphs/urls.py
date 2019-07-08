@@ -12,6 +12,9 @@ urlpatterns = [
 
     path('', views.index, name='index'),
 
+    path('account', views.account, name='account'),
+    path('i18n/', include('django.conf.urls.i18n')),
+
     path('system', views.system, name='system'),
     path('system/type', views.system_change_type, name='system_type'),
     path('system/instance', views.system_change_instance, name='system_instance'),
