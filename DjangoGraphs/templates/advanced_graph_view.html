@@ -39,18 +39,6 @@
     <script>
 
         $(document).ready(function () {
-            data = [];
-            {% for gd in graph_data %}
-                data.push([
-                {% language 'en'%}
-                    {% for dp in gd.data %}
-                        {'date': new Date('{{ dp.timestamp|date:"Y-m-d H:i" }}'), 'value': {{ dp.value|floatformat:1|unlocalize  }}},
-                    {% endfor %}
-                 {% endlanguage %}
-                ]);
-            {% endfor %}
-
-
             legend = [];
             colors = [];
             units = [];
@@ -60,49 +48,60 @@
                 units.push('{{ gd.unit }}');
             {% endfor %}
 
-            const main = {
-                title: '{% if graph.title %}{{ graph.title }}{% else %}{{ graph.name }}{% endif %}',
-                data: data,
-                missing_is_hidden: true,
-                target: '#graph',
-                brush: 'xy',
-                height: ($(document).height() - 150) * 0.75,
-                full_width: true,
-                color: colors,
-                aggregate_rollover: true,
-                mouseover: function (d, i) {
-                    var pf = d3.format('.0s');
+            d3.json("{% url 'api_graph_data' %}?graph={{ graph.pk }}").then(function (data) {
+                var parseDate = d3.timeFormat('%Y-%m-%d %H:00');
 
-                    d3.select('#graph svg .mg-active-datapoint').style('fill', 'white')
-                        .text(moment(d.key).format('HH:mm, DD. MMM YYYY')).attr("x", 0).attr("dy","1.2em");
-
-                    for (x in d.values) {
-                        let line = d.values[x];
-                        d3.select('#graph svg .mg-active-datapoint').append("tspan").style('fill', colors[(line.index - 1)])
-                        .text( legend[(line.index - 1)] ).attr("x", 0).attr("dy","1.2em");
-
-                        d3.select('#graph svg .mg-active-datapoint').append("tspan").style('fill', 'white')
-                        .text( ' - ' + line.value + ' ' + units[(line.index - 1)]);
+                for (let i = 0; i < data.length; i++) {
+                    for (let h = 0; h < data[i].length; h++) {
+                        data[i][h].date = new Date( parseDate(new Date(data[i][h].date)));
                     }
                 }
-            };
 
-            MG.data_graphic(main);
-            MG.data_graphic({
-                data: data,
-                height: ($(document).height() - 150) * 0.25,
-                missing_is_hidden: true,
-                target: '#graph_overview',
-                brush: 'x',
-                zoom_target: main,
-                x_axis: false,
-                y_axis: false,
-                full_width: true,
-                color: colors,
-                showActivePoint: false,
+                console.log(data);
+                const main = {
+                    title: '{% if graph.title %}{{ graph.title }}{% else %}{{ graph.name }}{% endif %}',
+                    data: data,
+                    target: '#graph',
+                    brush: 'x',
+                    height: ($(document).height() - 150) * 0.75,
+                    full_width: true,
+                    color: colors,
+                    aggregate_rollover: true,
+                    mouseover: function (d, i) {
+                        var pf = d3.format('.0s');
+
+                        d3.select('#graph svg .mg-active-datapoint').style('fill', 'white')
+                            .text(moment(d.key).format('HH:mm, DD. MMM YYYY')).attr("x", 0).attr("dy", "1.2em");
+
+                        for (x in d.values) {
+                            let line = d.values[x];
+                            d3.select('#graph svg .mg-active-datapoint').append("tspan").style('fill', colors[(line.index - 1)])
+                                .text(legend[(line.index - 1)]).attr("x", 0).attr("dy", "1.2em");
+
+                            d3.select('#graph svg .mg-active-datapoint').append("tspan").style('fill', 'white')
+                                .text(' - ' + line.value + ' ' + units[(line.index - 1)]);
+                        }
+                    }
+                };
+
+                MG.data_graphic(main);
+                MG.data_graphic({
+                    data: data,
+                    height: ($(document).height() - 150) * 0.25,
+                    target: '#graph_overview',
+                    brush: 'x',
+                    zoom_target: main,
+                    x_axis: false,
+                    y_axis: false,
+                    full_width: true,
+                    color: colors,
+                    showActivePoint: false,
+                });
             });
 
+
         });
+
 
     </script>
 

@@ -1,4 +1,3 @@
-from django.db import router
 from django.urls import path, include
 from rest_framework import routers
 from rest_framework.documentation import include_docs_urls
@@ -51,6 +50,8 @@ urlpatterns = [
     # API
     path('api/docs', include_docs_urls(title='DjangoGraphs API', public=False), name='api_docs'),
     path('api/auth/', include('rest_framework.urls')),
+
+    path('api/graph_data/', GraphDataView.as_view(), name='api_graph_data'),
 
     path('api/', include(router.urls)),
 ]
