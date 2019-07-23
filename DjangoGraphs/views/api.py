@@ -31,7 +31,7 @@ class GraphDataView(APIView):
     Retrieve Graph Data
     """
     serializer_class = GraphDataSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,) # TODO check auth for public graphs
 
     def get(self, request):
         results = request.query_params
