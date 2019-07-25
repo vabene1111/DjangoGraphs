@@ -31,7 +31,6 @@ class GraphDataView(APIView):
     Retrieve Graph Data
     """
     serializer_class = GraphDataSerializer
-    permission_classes = (permissions.IsAuthenticated,) # TODO check auth for public graphs
 
     def get(self, request):
         results = request.query_params
@@ -42,6 +41,9 @@ class GraphDataView(APIView):
             graph = Graph.objects.get(pk=int(results['graph']))
         except Graph.DoesNotExist:
             return Response({'err': '1', 'msg': 'No graph with given id'})
+
+        if not request.user.is_authenticated and not graph.public:
+            return Response({'err': '2', 'msg': 'This data cannot be viewed without authentication'})
 
         data = []
 

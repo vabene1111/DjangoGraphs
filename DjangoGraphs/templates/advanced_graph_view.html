@@ -49,7 +49,13 @@
             {% endfor %}
 
             d3.json("{% url 'api_graph_data' %}?graph={{ graph.pk }}").then(function (data) {
-                var parseDate = d3.timeFormat('%Y-%m-%d %H:00');
+
+                if (data.err === "2"){
+                    alert('{% trans 'This graph is not public. You cannot view it since your are not authenticated!' %}');
+                    window.location.href = "{% url 'index' %}";
+                }
+
+                let parseDate = d3.timeFormat('%Y-%m-%d %H:00');
 
                 for (let i = 0; i < data.length; i++) {
                     for (let h = 0; h < data[i].length; h++) {
