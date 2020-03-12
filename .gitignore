@@ -78,3 +78,5 @@ venv/
 staticfiles/
 mediafiles/
 postgresql/
+
+/docker-compose.yml
