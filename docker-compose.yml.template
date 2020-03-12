@@ -1,0 +1,46 @@
+version: "3"
+services:
+  db_graphs:
+    restart: always
+    image: "postgres:12-alpine"
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+    networks:
+      - default
+
+  web_graphs:
+    privileged: true
+    build: .
+    restart: always
+    env_file:
+      - ./.env
+    command: "gunicorn --bind 0.0.0.0:8080 Graphs.wsgi"
+    volumes:
+      - .:/Graphs
+      - /sys:/sys
+    depends_on:
+      - db_graphs
+    networks:
+      - default
+
+  nginx_graphs:
+    image: "nginx"
+    restart: always
+    env_file:
+      - ./.env
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./staticfiles:/static
+      - ./mediafiles:/media
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.recipes.rule=Host(`graphs.mydomain.com`)"
+      - "traefik.http.routers.recipes.entrypoints=web_secure"
+      - "traefik.http.routers.recipes.tls.certresolver=le_resolver"
+
+networks:
+  default:
+    external:
+      name: traefik

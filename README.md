@@ -29,15 +29,8 @@ The usage is pretty straight forward after understanding a few basic concepts
 Usage of the API is explained in the build in API Docs. If used from anywhere else than the API browser you basically need to supply authentication (either basic or token) and a json body containing a type, instance and value.
 
 ## Installation
-
-The default `docker-compose.yml` is meant to run behind [Jwilder's nginx-proxy container](https://github.com/jwilder/nginx-proxy). The setup can look something like [this](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion).
-
-If you don't want to the `nginx-proxy` you only need to make a few changes in the `dcoker-compose.yml`.
-
-1. Clone this repository at your desired location `git clone https://github.com/vabene1111/DjangoGraphs.git`
-2. Copy `.env.template` to `.env` and fill in all required fields
-3. Bring up the container by running `docker-compose up -d --build`
-4. Run `sh install.sh` to populate the database and create your default user
+You can use the included docker compose template either as a standalone or in combination with traefik.
+The process is basically the same as [here](https://github.com/vabene1111/recipes)
 
 If you want to install it without docker you can follow a tutorial like [this one](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-18-04), note that you have to manually set the environment variables in the `.env.template` file.
 
