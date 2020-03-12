@@ -36,9 +36,9 @@ services:
       - ./mediafiles:/media
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.recipes.rule=Host(`graphs.mydomain.com`)"
-      - "traefik.http.routers.recipes.entrypoints=web_secure"
-      - "traefik.http.routers.recipes.tls.certresolver=le_resolver"
+      - "traefik.http.routers.graphs.rule=Host(`graphs.mydomain.com`)"
+      - "traefik.http.routers.graphs.entrypoints=web_secure"
+      - "traefik.http.routers.graphs.tls.certresolver=le_resolver"
 
 networks:
   default:
