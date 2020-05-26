@@ -7,8 +7,6 @@ services:
       - ./postgresql:/var/lib/postgresql/data
     env_file:
       - ./.env
-    networks:
-      - default
 
   web_graphs:
     privileged: true
@@ -22,8 +20,6 @@ services:
       - /sys:/sys
     depends_on:
       - db_graphs
-    networks:
-      - default
 
   nginx_graphs:
     image: "nginx"
