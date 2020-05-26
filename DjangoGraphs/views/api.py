@@ -1,17 +1,7 @@
-import datetime
-import itertools
-import json
-
-import django
-from django.core.serializers import serialize
-from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models.functions import TruncHour
-from django.http import JsonResponse
 from rest_framework import permissions, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from django.utils.translation import gettext as _
 
 from ..serializers import *
 
@@ -20,7 +10,7 @@ class DataEntrySet(viewsets.ModelViewSet):
     """
     API endpoint that allows data entries to be viewed or edited.
     """
-    queryset = DataEntry.objects.all()
+    queryset = DataEntry.objects.all()[:100]
     serializer_class = DataEntrySerializer
 
     permission_classes = (permissions.IsAuthenticated,)
